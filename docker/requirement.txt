@@ -1,0 +1,9 @@
+pandas
+sqlalchemy
+psycopg2-binary
+google-cloud-bigquery
+pandas-gbq
+dbt-bigquery
+scikit-learn
+joblib
+python-dotenv

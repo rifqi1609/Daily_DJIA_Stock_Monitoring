@@ -1,0 +1,404 @@
+2026-06-10 12:16:52,711:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 12:16:52,711:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 12:16:52,711:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 12:16:52,711:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 12:16:56,988:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:57,310:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:57,493:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:57,732:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:57,754:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:57,783:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:58,035:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:58,168:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:58,375:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:58,406:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:58,544:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:58,711:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:58,800:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:58,885:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:59,075:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:59,146:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:59,285:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:59,431:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:59,441:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:59,765:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:16:59,947:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:00,121:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:00,202:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:00,382:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:00,453:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:00,627:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:00,780:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:00,901:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:00,975:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:01,088:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:17:01,226:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:29,663:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 12:22:29,663:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 12:22:29,663:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 12:22:29,663:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 12:22:33,359:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:33,935:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:34,131:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:34,253:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:34,392:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:34,409:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:34,614:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:34,743:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:34,872:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:34,991:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:35,128:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:35,312:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:35,367:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:35,517:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:35,658:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:35,826:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:35,905:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:36,018:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:36,183:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:36,403:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:36,418:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:36,466:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:36,672:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:36,854:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:36,966:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:37,045:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:37,193:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:37,324:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:37,339:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:37,518:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 12:22:37,632:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:22,568:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 13:22:22,568:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 13:22:22,568:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 13:22:22,568:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 13:22:27,899:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:28,307:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:28,504:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:28,509:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:28,727:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:28,871:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:28,919:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:29,143:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:29,196:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:29,494:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:29,559:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:29,739:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:29,968:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:30,117:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:30,283:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:30,376:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:30,528:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:30,694:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:30,694:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:30,903:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:31,133:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:31,221:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:31,343:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:31,474:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:31,698:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:31,845:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:31,880:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:32,019:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:32,150:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:32,265:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:22:32,393:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:13,134:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 13:30:13,134:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 13:30:13,134:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 13:30:13,134:WARNING:
+'cuml' is a soft dependency and not included in the pycaret installation. Please run: `pip install cuml` to install.
+2026-06-10 13:30:16,697:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:16,942:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:17,102:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:17,263:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:17,314:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:17,500:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:17,603:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:17,746:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:17,913:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:18,039:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:18,279:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:18,486:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:18,584:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:18,758:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:18,762:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:18,966:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:19,163:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:19,300:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:19,394:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:19,720:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:19,746:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:19,983:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:20,088:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:20,196:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:20,355:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:20,372:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:20,501:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:20,568:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:20,722:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:20,823:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
+2026-06-10 13:30:20,913:WARNING:c:\Users\DELL\anaconda3\envs\p11_env\Lib\site-packages\yfinance\scrapers\history.py:396: FutureWarning: The default dtype for empty Series will be 'object' instead of 'float64' in a future version. Specify a dtype explicitly to silence this warning.
+  self._capital_gains = pd.Series()
+
