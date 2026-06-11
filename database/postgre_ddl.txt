@@ -1,42 +1,44 @@
-# Table for Raw Data
 CREATE TABLE fundamental_data (
-    Ticker VARCHAR(10),
-    Company_Name VARCHAR(255),
-    Sector VARCHAR(100),
-    Extraction_Date DATE,
-    Market_Cap NUMERIC,
-    Trailing_PE DOUBLE PRECISION,
-    Forward_PE DOUBLE PRECISION,
-    Price_to_Book DOUBLE PRECISION,
-    PEG_Ratio DOUBLE PRECISION,
-    EV_to_EBITDA DOUBLE PRECISION,
-    ROE DOUBLE PRECISION,
-    ROA DOUBLE PRECISION,
-    Gross_Margin DOUBLE PRECISION,
-    Operating_Margin DOUBLE PRECISION,
-    Profit_Margin DOUBLE PRECISION,
-    Current_Ratio DOUBLE PRECISION,
-    Quick_Ratio DOUBLE PRECISION,
-    Debt_to_Equity DOUBLE PRECISION,
-    Cash_per_Share DOUBLE PRECISION,
-    Revenue_Growth DOUBLE PRECISION,
-    Earnings_Growth DOUBLE PRECISION,
-    Beta DOUBLE PRECISION,
-    Short_Ratio DOUBLE PRECISION,
-    "Fifty_Two_Week_Change" DOUBLE PRECISION
+    "Ticker" VARCHAR(10),
+    "Company_Name" VARCHAR(255),
+    "Sector" VARCHAR(100),
+    "Extraction_Date" DATE,
+    "Market_Cap" NUMERIC,
+    "Trailing_PE" DOUBLE PRECISION,
+    "Forward_PE" DOUBLE PRECISION,
+    "Price_to_Book" DOUBLE PRECISION,
+    "PEG_Ratio" DOUBLE PRECISION,
+    "EV_to_EBITDA" DOUBLE PRECISION,
+    "ROE" DOUBLE PRECISION,
+    "ROA" DOUBLE PRECISION,
+    "Gross_Margin" DOUBLE PRECISION,
+    "Operating_Margin" DOUBLE PRECISION,
+    "Profit_Margin" DOUBLE PRECISION,
+    "Current_Ratio" DOUBLE PRECISION,
+    "Quick_Ratio" DOUBLE PRECISION,
+    "Debt_to_Equity" DOUBLE PRECISION,
+    "Cash_per_Share" DOUBLE PRECISION,
+    "Revenue_Growth" DOUBLE PRECISION,
+    "Earnings_Growth" DOUBLE PRECISION,
+    "Beta" DOUBLE PRECISION,
+    "Short_Ratio" DOUBLE PRECISION,
+    "Fifty_Two_Week_Change" DOUBLE PRECISION,
+    PRIMARY KEY ("Ticker", "Extraction_Date")
 );
 
 CREATE TABLE market_data (
-    Date DATE,
-    DJIA_Close DOUBLE PRECISION
+    "Date" DATE,
+    "DJIA_Close" DOUBLE PRECISION,
+    PRIMARY KEY ("Date")
 );
 
 CREATE TABLE technical_data (
-    Date DATE,
-    Ticker VARCHAR(10),
-    Open DOUBLE PRECISION,
-    High DOUBLE PRECISION,
-    Low DOUBLE PRECISION,
-    Close DOUBLE PRECISION,
-    Volume BIGINT
+    "Date" DATE,
+    "Ticker" VARCHAR(10),
+    "Open" DOUBLE PRECISION,
+    "High" DOUBLE PRECISION,
+    "Low" DOUBLE PRECISION,
+    "Close" DOUBLE PRECISION,
+    "Volume" BIGINT,
+    PRIMARY KEY ("Date", "Ticker")
 );

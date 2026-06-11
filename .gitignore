@@ -1,0 +1,11 @@
+# Credentials & Secrets
+.env
+*.json
+dags/credentials/
+
+# Log & File
+*.log
+tmp/
+
+# Machine Learning Models & Data Local
+*.pkl

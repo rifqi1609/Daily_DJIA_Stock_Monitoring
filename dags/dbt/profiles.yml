@@ -3,8 +3,9 @@ stock_screening_portfolio:
   outputs:
     dev:
       type: bigquery
-      method: oauth
+      method: service-account
       project: "{{ env_var('GCP_PROJECT_ID') }}"
       dataset: clean_stock_data
-      threads: 4 
+      threads: 4
+      keyfile: /opt/airflow/dags/credentials/bq_key.json
       location: US

@@ -1,4 +1,7 @@
 pandas
+numpy
+yfinance
+requests
 sqlalchemy
 psycopg2-binary
 google-cloud-bigquery
