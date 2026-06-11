@@ -1,6 +1,7 @@
 pandas
 numpy
-yfinance
+yfinance==0.2.36
+multitasking<=0.0.11
 requests
 sqlalchemy
 psycopg2-binary

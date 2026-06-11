@@ -127,11 +127,11 @@ if __name__ == "__main__":
     load_dotenv(override=True)
     
     # 2. Database Configuration
-    DB_USER = os.getenv('POSTGRES_USER')
-    DB_PASSWORD = os.getenv('POSTGRES_PASS')
-    DB_HOST = os.getenv('POSTGRES_HOST')
-    DB_PORT = os.getenv('POSTGRES_PORT')
-    DB_NAME = os.getenv('POSTGRES_DB')
+    DB_USER = os.getenv('STOCK_DB_USER')
+    DB_PASSWORD = os.getenv('STOCK_DB_PASS')
+    DB_HOST = os.getenv('STOCK_DB_HOST')
+    DB_PORT = os.getenv('STOCK_DB_PORT')
+    DB_NAME = os.getenv('STOCK_DB_DB')
     
     SCHEMA_NAME = 'public'
     TABLE_FUNDAMENTAL = 'fundamental_data'

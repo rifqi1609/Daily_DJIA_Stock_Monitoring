@@ -7,11 +7,11 @@ def extract_and_load_raw():
     load_dotenv(override=True)
     
     # Credential
-    PG_USER = os.getenv('POSTGRES_USER')
-    PG_PASSWORD = os.getenv('POSTGRES_PASS')
-    PG_HOST = os.getenv('POSTGRES_HOST')
-    PG_PORT = os.getenv('POSTGRES_PORT')
-    PG_DB = os.getenv('POSTGRES_DB')
+    DB_USER = os.getenv('STOCK_DB_USER')
+    DB_PASSWORD = os.getenv('STOCK_DB_PASS')
+    DB_HOST = os.getenv('STOCK_DB_HOST')
+    DB_PORT = os.getenv('STOCK_DB_PORT')
+    DB_NAME = os.getenv('STOCK_DB_DB')
     
     GCP_PROJECT = os.getenv('GCP_PROJECT_ID')
     
@@ -22,7 +22,7 @@ def extract_and_load_raw():
     """
     
     # Extract Data from PostgreSQL
-    engine_url = f'postgresql://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT}/{PG_DB}'
+    engine_url = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     pg_engine = create_engine(engine_url)
     
     try:
