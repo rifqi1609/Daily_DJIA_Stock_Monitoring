@@ -7,6 +7,6 @@ stock_screening_portfolio:
       project: daily-stock-monitoring
       dataset: clean_stock_data
       threads: 4
-      keyfile: /opt/airflow/dags/bq_key.json
+      keyfile: /opt/airflow/dags/credentials/bq_key.json
       timeout_seconds: 300
       location: US

@@ -7,6 +7,9 @@ import requests
 from sqlalchemy import create_engine
 import os
 from dotenv import load_dotenv
+from sqlalchemy import text
+import time
+import random
 
 # 1. Setup Session
 session = requests.Session()
@@ -28,8 +31,16 @@ def extract_top_20_fundamentals(tickers):
     
     for idx, ticker in enumerate(tickers, start=1):
         try:
+            time.sleep(random.uniform(3, 7)) 
+            
             stock = yf.Ticker(ticker, session=session)
             info = stock.info
+            
+            # Debugging
+            if not info or len(info) < 5:
+                print(f"DEBUG: Data uncomplete for {ticker}")
+            else:
+                print(f"DEBUG: {idx}/{len(tickers)} Data complete for {ticker}")
             
             fundamental_data.append({
                 'Ticker': ticker,
@@ -108,6 +119,7 @@ def extract_OHLCV(tickers):
     technical_data = []
     for ticker in tickers:
         try:
+            time.sleep(random.uniform(3, 7))
             if ticker in data and not data[ticker].dropna(how='all').empty:
                 df_ticker = data[ticker].copy()
                 df_ticker.reset_index(inplace=True)
@@ -149,14 +161,27 @@ if __name__ == "__main__":
 
     # 5. Load to PostgreSQL
     try:
-        if not df_fundamentals.empty:
-            df_fundamentals.to_sql(TABLE_FUNDAMENTAL, engine, schema=SCHEMA_NAME, if_exists='append', index=False)
+        with engine.begin() as connection:
+            
+            # Fundamental Data
+            if not df_fundamentals.empty:
+                extraction_date = df_fundamentals['Extraction_Date'].iloc[0].strftime('%Y-%m-%d')
+                connection.execute(text(f"DELETE FROM {SCHEMA_NAME}.{TABLE_FUNDAMENTAL} WHERE \"Extraction_Date\" = '{extraction_date}'"))
+                df_fundamentals.to_sql(TABLE_FUNDAMENTAL, engine, schema=SCHEMA_NAME, if_exists='append', index=False)
 
-        if not df_market.empty:
-            df_market.to_sql(TABLE_MARKET, engine, schema=SCHEMA_NAME, if_exists='append', index=False)
+            # Market Data
+            if not df_market.empty:
+                market_dates = pd.to_datetime(df_market['Date']).dt.strftime('%Y-%m-%d').unique()
+                market_dates_str = "', '".join(market_dates)
+                connection.execute(text(f"DELETE FROM {SCHEMA_NAME}.{TABLE_MARKET} WHERE DATE(\"Date\") IN ('{market_dates_str}')"))
+                df_market.to_sql(TABLE_MARKET, engine, schema=SCHEMA_NAME, if_exists='append', index=False)
 
-        if not df_technicals.empty:
-            df_technicals.to_sql(TABLE_TECHNICAL, engine, schema=SCHEMA_NAME, if_exists='append', index=False)
+            # Technical Data
+            if not df_technicals.empty:
+                tech_dates = pd.to_datetime(df_technicals['Date']).dt.strftime('%Y-%m-%d').unique()
+                tech_dates_str = "', '".join(tech_dates)
+                connection.execute(text(f"DELETE FROM {SCHEMA_NAME}.{TABLE_TECHNICAL} WHERE DATE(\"Date\") IN ('{tech_dates_str}')"))
+                df_technicals.to_sql(TABLE_TECHNICAL, engine, schema=SCHEMA_NAME, if_exists='append', index=False)
 
     except Exception as e:
         raise e

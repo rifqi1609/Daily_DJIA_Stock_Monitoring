@@ -32,7 +32,7 @@ def extract_and_load_raw():
         if df_raw.empty:
             return
 
-        key_path = "/opt/airflow/dags/bq_key.json"
+        key_path = "/opt/airflow/dags/credentials/bq_key.json"
         credentials = service_account.Credentials.from_service_account_file(key_path)
         df_raw['Extraction_Date'] = pd.to_datetime(df_raw['Extraction_Date'])
         # Load to BigQuery

@@ -10,6 +10,6 @@ pandas-gbq
 dbt-bigquery
 dbt-core==1.8.2
 dbt-postgres==1.8.2
-scikit-learn
+scikit-learn==1.2.2
 joblib
 python-dotenv

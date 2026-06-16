@@ -125,14 +125,4 @@ The pipeline triggers **every trading day, 3 hours after market close**, ensurin
 
 ---
 
-## 🚀 Getting Started
-
-1. **Clone the repo** and copy `.env.example` to `.env`, filling in your credentials
-2. **Run Docker Compose** to spin up PostgreSQL, Airflow, and Metabase containers
-3. **Initialize the databases** using the DDL files in `database/`
-4. **Trigger the Airflow DAG** manually for the first run, then let the daily schedule take over
-5. **Connect your BI tools** — Power BI to BigQuery, Metabase to its configured database
-
----
-
 *Built for traders who want more than the defaults.*

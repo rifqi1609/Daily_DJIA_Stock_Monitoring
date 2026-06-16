@@ -145,17 +145,18 @@ def add_market_features(df, df_market):
     mkt["mkt_sma200"]     = mkt["DJIA_Close"].rolling(200).mean()
     mkt["mkt_above_sma200"] = (mkt["DJIA_Close"] > mkt["mkt_sma200"]).astype(int)
     mkt["mkt_vol_20d"]    = mkt["mkt_return_1d"].rolling(20).std()
-    
     mkt_cols = ["Date", "mkt_above_sma200", "mkt_vol_20d", "mkt_return_1d"]
-    
     df = df.merge(mkt[mkt_cols], on="Date", how="left")
-    
-    var_mkt = df.groupby("Ticker")["mkt_return_1d"].transform(lambda x: x.rolling(60).var())
+
+    # Backup for Data Delayed
+    cols_to_fill = ["mkt_above_sma200", "mkt_vol_20d", "mkt_return_1d"]
+    df[cols_to_fill] = df.groupby("Ticker")[cols_to_fill].ffill()
     
     # Rolling Covariance
     def calc_cov(group):
         return group["return_1d"].rolling(60).cov(group["mkt_return_1d"])
-        
+    
+    var_mkt = df.groupby("Ticker")["mkt_return_1d"].transform(lambda x: x.rolling(60).var())
     cov_rm = df.groupby("Ticker").apply(calc_cov).reset_index(level=0, drop=True)
 
     df = df.drop(columns=["mkt_return_1d","return_1d"])
@@ -188,6 +189,7 @@ def add_pivot_features(df):
 # Remove Unused Columns
 def cleaning(df):
     df = df.drop(columns=['Open', 'High', 'Low', 'Close', 'Volume', 'Date', 'Ticker'])
+    df = df.dropna()
     return df
 
 # Predict Data
@@ -236,7 +238,7 @@ def load_to_bigquery(df):
     if df.empty:
         return
     
-    key_path = "/opt/airflow/dags/bq_key.json"
+    key_path = "/opt/airflow/dags/credentials/bq_key.json"
     credentials = service_account.Credentials.from_service_account_file(key_path)
     GCP_PROJECT = os.getenv('GCP_PROJECT_ID')
     destination = 'clean_stock_data.stock_screening'
@@ -267,7 +269,7 @@ def execute_predictions(df_technicals):
     df_today['Prediction'] = predictions
     df_today['Probability'] = probabilities
     
-    # Masukkan kolom Probability ke dalam final output
+    # Final Output
     df_final_output = df_today[['Date', 'Ticker', 'Prediction', 'Probability']].copy()
 
     # Load to BigQuery
