@@ -4,6 +4,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine
 import os
+from google.oauth2 import service_account
 from dotenv import load_dotenv
 
 # Price & Return Characteristics
@@ -13,24 +14,13 @@ def add_price_features(df):
 
     # Return
     df["return_1d"]  = g.pct_change(1)
-    df["return_3d"]  = g.pct_change(3)
     df["return_5d"]  = g.pct_change(5)
-    df["return_10d"] = g.pct_change(10)
     df["return_20d"] = g.pct_change(20)
-
-    # Gap Price
-    prev_close = g.shift(1)
-    df["overnight_gap"] = (df["Open"] - prev_close) / prev_close
 
     # Candle Body & Shadow
     df["body_size"]    = (df["Close"] - df["Open"]).abs() / df["Open"]
     df["upper_shadow"]  = (df["High"] - df[["Close","Open"]].max(axis=1)) / df["Open"]
-    df["lower_shadow"]  = (df[["Close","Open"]].min(axis=1) - df["Low"]) / df["Open"]
     df["hl_range"]     = (df["High"] - df["Low"]) / df["Open"]   # intraday range
-
-    # Close Position
-    hl = df["High"] - df["Low"]
-    df["close_position"] = (df["Close"] - df["Low"]) / hl.replace(0, np.nan)
     return df
 
 # Moving Averanges & Trend Characteristics
@@ -45,17 +35,14 @@ def add_ma_features(df):
         
     # SMA Distance
     for w in windows:
-        df[f"dist_sma_{w}"] = (df["Close"] - df[f"temp_sma_{w}"]) / df[f"temp_sma_{w}"]
-        df[f"dist_ema_{w}"] = (df["Close"] - df[f"temp_ema_{w}"]) / df[f"temp_ema_{w}"]
+        df[f"dist_sma_10"] = (df["Close"] - df[f"temp_sma_10"]) / df[f"temp_sma_10"]
+        df[f"dist_ema_10"] = (df["Close"] - df[f"temp_ema_10"]) / df[f"temp_ema_10"]
 
     # Micro Trend
     df["crossover_ema_5_20"] = df["temp_ema_5"] / df["temp_ema_20"]
     
     # Macro Trend
     df["crossover_sma_50_200"] = df["temp_sma_50"] / df["temp_sma_200"]
-    
-    # Market Regime
-    df["bullish_regime"] = (df["temp_sma_50"] > df["temp_sma_200"]).astype(int)
 
     # SMA Slope
     g_sma20 = df.groupby("Ticker")["temp_sma_20"]
@@ -84,12 +71,8 @@ def add_volatility_features(df):
     
     df["atr_14"] = tr.groupby(df["Ticker"]).transform(lambda x: x.ewm(alpha=1/14, adjust=False).mean())
     df["atr_pct"] = df["atr_14"] / df["Close"]
-    
-    # Volatility Ratio
-    df["vol_ratio_5_20"] = np.where(
-        df["volatility_20d"] == 0, 
-        np.nan, 
-        df["volatility_5d"] / df["volatility_20d"])
+
+    df = df.drop(columns="atr_14")
     return df
 
 # Momentum & Oscillator Characteristics
@@ -111,24 +94,6 @@ def add_momentum_features(df):
     low14 = df.groupby("Ticker")["Low"].transform(lambda x: x.rolling(14).min())
     high14 = df.groupby("Ticker")["High"].transform(lambda x: x.rolling(14).max())
     
-    df["stoch_k"] = 100 * (close - low14) / (high14 - low14).replace(0, np.nan)
-    df["stoch_d"] = df.groupby("Ticker")["stoch_k"].transform(lambda x: x.rolling(3).mean())
-    
-    # MACD
-    ema12 = df.groupby("Ticker")["Close"].transform(lambda x: x.ewm(span=12, adjust=False).mean())
-    ema26 = df.groupby("Ticker")["Close"].transform(lambda x: x.ewm(span=26, adjust=False).mean())
-    df["macd"] = ema12 - ema26
-    df["macd_signal"] = df.groupby("Ticker")["macd"].transform(lambda x: x.ewm(span=9, adjust=False).mean())
-    df["macd_hist"] = df["macd"] - df["macd_signal"]
-    
-    prev_macd = df.groupby("Ticker")["macd"].shift(1)
-    prev_signal = df.groupby("Ticker")["macd_signal"].shift(1)
-    df["macd_cross_up"] = ((df["macd"] > df["macd_signal"]) & (prev_macd <= prev_signal)).astype(int)
-    
-    # Rate of Change (ROC)
-    for w in [5, 10, 20]:
-        df[f"roc_{w}"] = df.groupby("Ticker")["Close"].transform(lambda x: (x - x.shift(w)) / x.shift(w).replace(0, np.nan))
-        
     # Williams %R
     df["williams_r"] = -100 * (high14 - close) / (high14 - low14).replace(0, np.nan)
     
@@ -169,27 +134,7 @@ def add_volume_features(df):
     sum_vol = g_vol.transform(lambda x: x.rolling(20).sum())
     
     df["cmf_20"] = sum_clv_vol / sum_vol.replace(0, np.nan) 
-    return df
-
-# Bollinger Bands Characteristics
-def add_bollinger_features(df):
-# SMA and STD Calculation
-    g_close = df.groupby("Ticker")["Close"]
-    sma20 = g_close.transform(lambda x: x.rolling(20).mean())
-    std20 = g_close.transform(lambda x: x.rolling(20).std())
-    
-    # Upper and Lower Bands Calculation
-    bb_upper = sma20 + (2 * std20)
-    bb_lower = sma20 - (2 * std20)
-    
-    # Bandwidth dan %B Calculation
-    df["bb_width"] = (bb_upper - bb_lower) / sma20
-    df["bb_pct"] = (df["Close"] - bb_lower) / (bb_upper - bb_lower).replace(0, np.nan)
-    
-    # Bollinger Squeeze
-    rolling_quantile = df.groupby("Ticker")["bb_width"].transform(lambda x: x.rolling(20).quantile(0.2))
-    df["bb_squeeze"] = (df["bb_width"] < rolling_quantile).astype(int)
-    
+    df = df.drop(columns="vol_sma20")
     return df
 
 # DJIA Index Characteristics
@@ -197,15 +142,12 @@ def add_market_features(df, df_market):
     # Market Index Characteristics
     mkt = df_market.copy().sort_values("Date")
     mkt["mkt_return_1d"]  = mkt["DJIA_Close"].pct_change(1)
-    mkt["mkt_return_5d"]  = mkt["DJIA_Close"].pct_change(5)
-    mkt["mkt_return_20d"] = mkt["DJIA_Close"].pct_change(20)
-    mkt["mkt_sma50"]      = mkt["DJIA_Close"].rolling(50).mean()
     mkt["mkt_sma200"]     = mkt["DJIA_Close"].rolling(200).mean()
     mkt["mkt_above_sma200"] = (mkt["DJIA_Close"] > mkt["mkt_sma200"]).astype(int)
     mkt["mkt_vol_20d"]    = mkt["mkt_return_1d"].rolling(20).std()
     
-    mkt_cols = ["Date", "mkt_return_1d", "mkt_return_5d", "mkt_return_20d", 
-                "mkt_above_sma200", "mkt_vol_20d"]
+    mkt_cols = ["Date", "mkt_above_sma200", "mkt_vol_20d", "mkt_return_1d"]
+    
     df = df.merge(mkt[mkt_cols], on="Date", how="left")
     
     var_mkt = df.groupby("Ticker")["mkt_return_1d"].transform(lambda x: x.rolling(60).var())
@@ -215,11 +157,11 @@ def add_market_features(df, df_market):
         return group["return_1d"].rolling(60).cov(group["mkt_return_1d"])
         
     cov_rm = df.groupby("Ticker").apply(calc_cov).reset_index(level=0, drop=True)
+
+    df = df.drop(columns=["mkt_return_1d","return_1d"])
     
     # Beta, Alpha, dan Relative Strength
     df["beta_60d"] = cov_rm / var_mkt.replace(0, np.nan)
-    df["alpha_60d"] = df["return_1d"] - (df["beta_60d"] * df["mkt_return_1d"])
-    df["rs_vs_mkt_20d"] = df["return_20d"] - df["mkt_return_20d"]
     return df
 
 # Resistance Characteristics
@@ -234,7 +176,6 @@ def add_pivot_features(df):
     r1 = (2 * pivot) - low_prev
     s1 = (2 * pivot) - high_prev
     r2 = pivot + (high_prev - low_prev)
-    s2 = pivot - (high_prev - low_prev)
     
     # Resistance Characteristics
     cur_close = df["Close"]
@@ -242,14 +183,11 @@ def add_pivot_features(df):
     df["dist_r1"] = (r1 - cur_close) / cur_close.replace(0, np.nan)
     df["dist_s1"] = (cur_close - s1) / cur_close.replace(0, np.nan)
     df["dist_r2"] = (r2 - cur_close) / cur_close.replace(0, np.nan)
-    df["dist_s2"] = (cur_close - s2) / cur_close.replace(0, np.nan)
     return df
 
 # Remove Unused Columns
 def cleaning(df):
-    top_30_features = ['atr_pct', 'williams_r', 'volatility_20d', 'mkt_above_sma200', 'return_10d', 'dist_sma_200', 'volatility_10d', 'crossover_sma_50_200', 'stoch_k', 'sma20_slope_5d', 'crossover_ema_5_20', 'bb_squeeze', 'mkt_return_1d',
-                       'mkt_vol_20d', 'dist_s2', 'vol_change_1d', 'close_position', 'macd_signal', 'bb_pct', 'return_20d', 'mkt_return_20d', 'dist_sma_5', 'overnight_gap', 'obv', 'vpt', 'adl', 'cmf_20', 'bb_width', 'body_size', 'dist_sma_20']
-    df = df[top_30_features]
+    df = df.drop(columns=['Open', 'High', 'Low', 'Close', 'Volume', 'Date', 'Ticker'])
     return df
 
 # Predict Data
@@ -298,6 +236,8 @@ def load_to_bigquery(df):
     if df.empty:
         return
     
+    key_path = "/opt/airflow/dags/bq_key.json"
+    credentials = service_account.Credentials.from_service_account_file(key_path)
     GCP_PROJECT = os.getenv('GCP_PROJECT_ID')
     destination = 'clean_stock_data.stock_screening'
     
@@ -305,7 +245,8 @@ def load_to_bigquery(df):
         df.to_gbq(
             destination_table=destination,
             project_id=GCP_PROJECT,
-            if_exists='append'
+            if_exists='append',
+            credentials=credentials
         )
 
     except Exception as e:
@@ -317,13 +258,17 @@ def execute_predictions(df_technicals):
     X_today = cleaning(df_today)
 
     # Model Prediction
-    model_path = '/opt/airflow/dags/models/final_model.pkl'
+    model_path = '/opt/airflow/dags/ml_models/final_model.pkl'
     final_model = joblib.load(model_path)
     predictions = model_deployment(X_today, final_model)
+    probabilities = final_model.predict_proba(X_today)[:, 1]
 
     # Format Output
     df_today['Prediction'] = predictions
-    df_final_output = df_today[['Date', 'Ticker', 'Prediction']].copy()
+    df_today['Probability'] = probabilities
+    
+    # Masukkan kolom Probability ke dalam final output
+    df_final_output = df_today[['Date', 'Ticker', 'Prediction', 'Probability']].copy()
 
     # Load to BigQuery
     load_to_bigquery(df_final_output)
@@ -338,7 +283,6 @@ if __name__ == "__main__":
     df_technicals = add_volatility_features(df_technicals)
     df_technicals = add_momentum_features(df_technicals)
     df_technicals = add_volume_features(df_technicals)
-    df_technicals = add_bollinger_features(df_technicals)
     df_technicals = add_market_features(df_technicals, df_market)
     df_technicals = add_pivot_features(df_technicals)
     execute_predictions(df_technicals)

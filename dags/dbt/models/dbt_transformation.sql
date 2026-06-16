@@ -2,6 +2,7 @@
     config(
         materialized='incremental',
         unique_key=['Ticker', 'extraction_date']
+        alias='transformed_stock_dashboard'
     )
 }}
 
@@ -14,7 +15,7 @@ SELECT
         WHEN f.market_cap >= 10000000000 THEN 'Large Cap'
         WHEN f.market_cap >= 2000000000 THEN 'Mid Cap'
         ELSE 'Small Cap'
-    END AS market_cap_category,
+    END AS Market_Cap_Category,
 
     -- Categorizing Trailing P/E
     CASE 
@@ -23,7 +24,7 @@ SELECT
         WHEN f.trailing_pe > 15 AND f.trailing_pe <= 25 THEN 'Fair'
         WHEN f.trailing_pe > 25 THEN 'Growth/Overvalued'
         ELSE 'Unknown'
-    END AS valuation_category,
+    END AS Valuation_Category,
 
     -- Categorizing Liquidity
     CASE 
@@ -31,9 +32,9 @@ SELECT
         WHEN f.current_ratio >= 1.0 AND f.current_ratio < 1.5 THEN 'Adequate'
         WHEN f.current_ratio < 1.0 THEN 'High Risk'
         ELSE 'Unknown'
-    END AS liquidity_health
+    END AS Liquidity_Health
 
-FROM {{ source('sumber_data_saham', 'clean_fundamental_data') }} AS f
+FROM {{ source('data_source', 'stock_dashboard') }} AS f
 
 -- Incremental Processing
 {% if is_incremental() %}

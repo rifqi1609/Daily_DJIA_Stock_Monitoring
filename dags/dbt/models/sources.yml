@@ -4,4 +4,4 @@ sources:
   - name: data_source
     schema: clean_stock_data
     tables:
-      - name: fundamental_data
+      - name: stock_dashboard

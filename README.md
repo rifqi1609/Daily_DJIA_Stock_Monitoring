@@ -1,45 +1,138 @@
-# Stock Screening Dashboard
+# 📈 Daily Stock Monitoring Dashboard
 
-Nowadays, many traders face difficulties accessing customized information for their stock watchlists. This happens because every trader has their own unique technique for screening potential stocks. To address this, this dashboard provides traders with the flexibility to define and monitor the most pivotal metrics according to their specific trading approach.
+> A fully automated, end-to-end stock monitoring system — combining machine learning, cloud infrastructure, and real-time data pipelines to give traders a personalized, daily-updated edge.
 
 ---
 
-## 🛠️ Technology Tools & Skills
+## 🧩 The Problem
 
-| Category | Tools / Skills |
+Every trader has their own unique approach to screening stocks. Off-the-shelf tools force you into rigid, one-size-fits-all metrics that rarely match your strategy. This project solves that by giving you a **fully customizable dashboard** — built on your own criteria, updated automatically every trading day.
+
+---
+
+## ✨ Key Features
+
+- **ML-powered stock screening** — predicts potential stock picks 5 days ahead using a trained classification model
+- **Daily automation** — pipeline runs 3 hours after market close on every trading day
+- **Dual dashboards** — one for DJIA market overview (Power BI), one for ML-based opportunities (Metabase)
+- **Cloud-native infrastructure** — hosted on GCP, containerized with Docker, orchestrated via Airflow
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Tools |
 | :--- | :--- |
 | **Language & Framework** | Python, SQL |
-| **Databases & Storage** | PostgreSQL, Google BigQuery |
+| **Databases & Storage** | PostgreSQL (raw data), Google BigQuery (data warehouse) |
 | **Machine Learning** | Scikit-Learn (Classification Model) |
-| **Orchestration & DevOps**| Apache Airflow, Docker, Google Cloud Platform (GCP) Virtual Machine |
+| **Orchestration & DevOps** | Apache Airflow, Docker, GCP Virtual Machine |
 | **Data Transformation** | dbt (Data Build Tool) |
 | **Data Sources** | Yahoo Finance API |
 | **Business Intelligence** | Power BI, Metabase |
-| **Core Skills** | Data Pipelining, Batch Processing, Machine Learning Building & Deployment, Data Visualization |
 
 ---
 
-## 🔄 Project Flow
+## 🔄 How It Works
 
-### 1. Prepare Data Management
-* **PostgreSQL:** Used for saving and storing raw ingested data.
-* **BigQuery:** Used as the data warehouse for storing processed and transformed data.
+### 1. 🗄️ Data Management
+Raw market data ingested daily is stored in **PostgreSQL**, then loaded into **Google BigQuery** as the central data warehouse for downstream transformations and modeling.
 
-### 2. Build Stock Screening Model
-* Developed a classification model to predict and classify potential stocks 5 days ahead.
+### 2. 🤖 Stock Screening Model
+A **Scikit-Learn classification model** was trained to predict whether a stock is worth watching — generating a buy/no-buy signal for each ticker 5 days in advance.
 
-### 3. Orchestrate Data Pipeline
-An automated batch processing pipeline built to provide a daily-updated dashboard, configured via:
-* **Virtual Machine Preparation:** Hosted on Google Cloud Platform.
-* **Docker Preparation:** Containerizing the environment for consistency.
-* **Airflow Orchestration:** Managing the daily workflow schedules:
-  * **Daily Data Extraction:** Fetching latest market data from Yahoo Finance.
-  * **Daily dbt Run:** Executing data transformation models inside BigQuery.
-  * **Daily Stock Screening Prediction:** Running the ML model to generate new predictions.
+### 3. ⚙️ Automated Pipeline
+The entire workflow is orchestrated via **Apache Airflow** on a GCP VM, running three core daily tasks:
 
-### 4. Build Dashboard
-* **Power BI:** Dedicated to DJIA (Dow Jones Industrial Average) stock monitoring.
-* **Metabase:** Dedicated to tracking and visualizing potential stock monitoring based on ML predictions.
+| Task | Description |
+| :--- | :--- |
+| **Data Extraction** | Pulls the latest market data from Yahoo Finance |
+| **Data Migration** | Pulls the data from PostgreSQL to BigQuery |
+| **dbt Transformation** | Cleans and transforms raw data inside BigQuery |
+| **ML Prediction** | Runs the screening model and writes results back |
 
-### 5. Monitor DJIA Stocks
-* Observe the DJIA Stocks' Market Condition and Catch Potential Stocks. The dashboard is updated every trading days, 3 hours after market closed.
+### 4. 📊 Dashboards
+Two dedicated dashboards serve different monitoring needs:
+
+- **Power BI** — Macro-level view of DJIA stocks and overall market health
+- **Metabase** — Granular view of ML-flagged stocks with prediction scores and metrics
+
+### 5. 🔔 Daily Updates
+The pipeline triggers **every trading day, 3 hours after market close**, ensuring you always have fresh, actionable data waiting for you the next morning.
+
+---
+
+## 📁 Project Structure
+
+```
+.
+├── dags/                          # Airflow orchestration
+│   ├── credentials/
+│   │   └── bq_key.json            # GCP service account credentials
+│   ├── dbt/                       # dbt data transformation
+│   │   ├── models/
+│   │   │   ├── dbt_transformation.sql   # SQL transformation logic
+│   │   │   └── sources.yml              # Raw source definitions
+│   │   ├── dbt_project.yml        # dbt project config
+│   │   └── profiles.yml           # BigQuery connection settings
+│   ├── ml_models/
+│   │   └── final_model.pkl        # Trained, deployment-ready ML model
+│   ├── scripts/
+│   │   ├── data_extraction.py     # Fetches daily data from Yahoo Finance
+│   │   ├── extract_load.py        # EL pipeline: PostgreSQL → BigQuery
+│   │   └── model_deployment.py    # Runs daily inference / predictions
+│   └── dag.py                     # Main Airflow DAG (schedules & dependencies)
+│
+├── database/                      # DDL schemas for database initialization
+│   ├── bigquery_ddl.txt           # BigQuery table schemas
+│   └── postgre_ddl.txt            # PostgreSQL table schemas
+│
+├── ml_model/                      # Model research & experimentation
+│   ├── eda/                       # Auto-generated EDA reports
+│   │   ├── Processed Data EDA.html
+│   │   ├── Raw Market Data EDA.html
+│   │   └── Raw Technical Data EDA.html
+│   ├── model_building.ipynb       # Final model construction notebook
+│   ├── model_research.ipynb       # EDA, feature engineering, tuning & evaluation
+│   └── logs.log                   # Experiment activity log
+│
+├── .dockerignore / .gitignore     # Excludes credentials and cache from tracking
+├── .env                           # Sensitive environment variables
+├── docker-compose.yml             # Multi-container setup (Airflow, PostgreSQL, Metabase)
+├── dockerfile                     # Docker image build instructions
+├── logs.log                       # Main application log
+├── requirement.txt                # Python dependencies
+└── README.md                      # You are here
+```
+
+---
+
+## 📽️ Documentation & Demo
+
+### 🎥 Videos
+
+| Resource | Description | Link |
+| :--- | :--- | :--- |
+| 🎬 **Project Presentation** | Walkthrough of the system architecture, data pipeline design, and overall project overview | [Watch Video](www.google.com) |
+| 🖥️ **Dashboard Demo** | Live demo of the Power BI and Metabase dashboards in action | [Watch Video](www.google.com) |
+
+### 📊 Live Dashboards
+
+| Dashboard | Description | Link |
+| :--- | :--- | :--- |
+| 📉 **Power BI — DJIA Monitor** | Macro-level view of Dow Jones Industrial Average stocks and overall market health | [Open Dashboard](www.google.com) |
+| 🤖 **Metabase — ML Stock Screener** | Stock picks with key metrics | [Open Dashboard](www.google.com) |
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the repo** and copy `.env.example` to `.env`, filling in your credentials
+2. **Run Docker Compose** to spin up PostgreSQL, Airflow, and Metabase containers
+3. **Initialize the databases** using the DDL files in `database/`
+4. **Trigger the Airflow DAG** manually for the first run, then let the daily schedule take over
+5. **Connect your BI tools** — Power BI to BigQuery, Metabase to its configured database
+
+---
+
+*Built for traders who want more than the defaults.*

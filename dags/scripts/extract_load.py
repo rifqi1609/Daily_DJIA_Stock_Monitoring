@@ -1,3 +1,4 @@
+from google.oauth2 import service_account
 import os
 import pandas as pd
 from sqlalchemy import create_engine
@@ -17,8 +18,8 @@ def extract_and_load_raw():
     
     # Query Data
     sql_query = """
-        SELECT * FROM technical_data
-        WHERE date >= CURRENT_DATE - INTERVAL '1 day';
+        SELECT * FROM fundamental_data
+        WHERE "Extraction_Date" >= CURRENT_DATE - INTERVAL '1 day';
     """
     
     # Extract Data from PostgreSQL
@@ -30,12 +31,16 @@ def extract_and_load_raw():
         
         if df_raw.empty:
             return
-        
+
+        key_path = "/opt/airflow/dags/bq_key.json"
+        credentials = service_account.Credentials.from_service_account_file(key_path)
+        df_raw['Extraction_Date'] = pd.to_datetime(df_raw['Extraction_Date'])
         # Load to BigQuery
         df_raw.to_gbq(
             destination_table='clean_stock_data.stock_dashboard', 
             project_id=GCP_PROJECT,
-            if_exists='append'
+            if_exists='append',
+            credentials=credentials
         )
         
     except Exception as e:

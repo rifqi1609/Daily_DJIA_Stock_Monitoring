@@ -1,7 +1,8 @@
 CREATE TABLE clean_stock_data.stock_screening (
     Date DATE,
     Ticker STRING,
-    Prediction INT
+    Prediction INT,
+    Probability FLOAT64
 );
 
 CREATE TABLE clean_stock_data.stock_dashboard (
@@ -28,8 +29,5 @@ CREATE TABLE clean_stock_data.stock_dashboard (
     Earnings_Growth FLOAT64,
     Beta FLOAT64,
     Short_Ratio FLOAT64,
-    Fifty_Two_Week_Change FLOAT64,
-    market_cap_category STRING,
-    valuation_category STRING,
-    liquidity_health STRING
+    Fifty_Two_Week_Change FLOAT64
 );
