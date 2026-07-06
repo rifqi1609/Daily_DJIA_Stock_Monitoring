@@ -28,7 +28,7 @@ with DAG('Project',
     
     dbtTransformation = BashOperator(
         task_id='run_dbt_transformation',
-        bash_command='source ~/dbt_venv/bin/activate && export DBT_LOG_PATH=/tmp/dbt_logs && export DBT_TARGET_PATH=/tmp/dbt_target && export GRPC_POLL_STRATEGY=epoll1 && cd /opt/airflow/dags/dbt && dbt run --profiles-dir .'
+        bash_command='source /opt/airflow/dbt_venv/bin/activate && export DBT_LOG_PATH=/tmp/dbt_logs && export DBT_TARGET_PATH=/tmp/dbt_target && export GRPC_POLL_STRATEGY=epoll1 && cd /opt/airflow/dags/dbt && dbt run --profiles-dir .'
     )
     
     modelRunning = BashOperator(
