@@ -1,7 +1,12 @@
 {{
     config(
         materialized='incremental',
-        unique_key=['Ticker', 'Extraction_Date'],
+        incremental_strategy='insert_overwrite',
+        partition_by={
+            "field": "Extraction_Date",
+            "data_type": "date",
+            "granularity": "day"
+        },
         alias='transformed_stock_dashboard'
     )
 }}
@@ -69,5 +74,5 @@ SELECT
 FROM {{ source('data_source', 'stock_dashboard') }} AS f
 
 {% if is_incremental() %}
-  WHERE f.Extraction_Date > (SELECT MAX(Extraction_Date) FROM {{ this }})
+  WHERE f.Extraction_Date >= (SELECT MAX(Extraction_Date) FROM {{ this }})
 {% endif %}

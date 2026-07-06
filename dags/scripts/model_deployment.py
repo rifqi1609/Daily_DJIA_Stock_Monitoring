@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import create_engine
 import os
 from google.oauth2 import service_account
+from google.cloud import bigquery
 from dotenv import load_dotenv
 
 # Price & Return Characteristics
@@ -233,24 +234,69 @@ def extract_from_postgres():
     finally:
         engine.dispose()
 
+# # Connection to BigQuery
+# def load_to_bigquery(df):
+#     if df.empty:
+#         return
+    
+#     key_path = "/opt/airflow/dags/credentials/bq_key.json"
+#     credentials = service_account.Credentials.from_service_account_file(key_path)
+#     GCP_PROJECT = os.getenv('GCP_PROJECT_ID')
+#     destination = 'clean_stock_data.stock_screening'
+    
+#     try:
+#         df.to_gbq(
+#             destination_table=destination,
+#             project_id=GCP_PROJECT,
+#             if_exists='append',
+#             credentials=credentials
+#         )
+
+#     except Exception as e:
+#         raise e
+
 # Connection to BigQuery
 def load_to_bigquery(df):
     if df.empty:
         return
-    
+        
     key_path = "/opt/airflow/dags/credentials/bq_key.json"
     credentials = service_account.Credentials.from_service_account_file(key_path)
     GCP_PROJECT = os.getenv('GCP_PROJECT_ID')
     destination = 'clean_stock_data.stock_screening'
     
     try:
+        # Inisialisasi client BigQuery API
+        client = bigquery.Client(credentials=credentials, project=GCP_PROJECT)
+        
+        # 1. Ekstrak tanggal unik dari DataFrame untuk mendeteksi batch yang masuk
+        dates = pd.to_datetime(df['Date']).dt.strftime('%Y-%m-%d').unique()
+        dates_str = "', '".join(dates)
+        
+        # 2. Query untuk menghapus data lama di hari yang sama (agar digantikan yang baru)
+        delete_query = f"""
+            DELETE FROM `{GCP_PROJECT}.{destination}`
+            WHERE CAST(Date AS STRING) IN ('{dates_str}')
+        """
+        
+        # Kita bungkus dengan try-except agar skrip tidak gagal (crash) 
+        # jika ini adalah eksekusi hari pertama dan tabel di BigQuery belum ada.
+        try:
+            delete_job = client.query(delete_query)
+            delete_job.result() # Menunggu eksekusi DELETE selesai
+            print(f"Data lama untuk tanggal {dates_str} berhasil dihapus (jika ada).")
+        except Exception as e:
+            print(f"Melewati proses DELETE (Tabel mungkin belum dibuat): {e}")
+
+        # 3. Masukkan data (Prediksi model) yang baru
         df.to_gbq(
             destination_table=destination,
             project_id=GCP_PROJECT,
-            if_exists='append',
+            if_exists='append',  # Karena yang lama sudah dihapus, append akan aman dari duplikat
             credentials=credentials
         )
-
+        print("Data baru berhasil di-append ke BigQuery.")
+        
     except Exception as e:
         raise e
 
@@ -258,23 +304,23 @@ def load_to_bigquery(df):
 def execute_predictions(df_technicals):
     df_today = df_technicals.groupby('Ticker').tail(1).copy()
     X_today = cleaning(df_today)
-
+    
     # Model Prediction
     model_path = '/opt/airflow/dags/ml_models/final_model.pkl'
     final_model = joblib.load(model_path)
     predictions = model_deployment(X_today, final_model)
     probabilities = final_model.predict_proba(X_today)[:, 1]
-
+    
     # Format Output
     df_today['Prediction'] = predictions
     df_today['Probability'] = probabilities
     
     # Final Output
     df_final_output = df_today[['Date', 'Ticker', 'Prediction', 'Probability']].copy()
-
+    
     # Load to BigQuery
     load_to_bigquery(df_final_output)
-
+    
     return df_final_output
 
 # Execute Functions
