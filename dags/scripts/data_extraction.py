@@ -1,23 +1,14 @@
-# Library Preparation
-import yfinance as yf
 import pandas as pd
-import numpy as np
-from datetime import datetime, timedelta
-import requests
-from sqlalchemy import create_engine
+from datetime import datetime
+from sqlalchemy import create_engine, text
 import os
 from dotenv import load_dotenv
-from sqlalchemy import text
+from yahooquery import Ticker
 import time
-import random
 
-# 1. Setup Session
-session = requests.Session()
-session.headers.update({
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-})
-
-# DJIA Stocks
+# ---------------------------------------------------------
+# 1. Setup & Configuration
+# ---------------------------------------------------------
 djia_tickers = [
     'AAPL', 'AMGN', 'AXP', 'BA', 'CAT', 'CRM', 'CSCO', 'CVX', 'DIS', 'DOW', 
     'GS', 'HD', 'HON', 'IBM', 'INTC', 'JNJ', 'JPM', 'KO', 'MCD', 'MMM', 
@@ -25,120 +16,146 @@ djia_tickers = [
 ]
 index_ticker = '^DJI'
 
-# 2. Extract Fundamental
-def extract_top_20_fundamentals(tickers):
+# ---------------------------------------------------------
+# 2. Extraction Functions
+# ---------------------------------------------------------
+def get_proxies(proxy_url):
+    """Mengembalikan dictionary proxy jika URL tersedia."""
+    if proxy_url:
+        return {
+            "http": proxy_url,
+            "https": proxy_url
+        }
+    return None
+
+def extract_fundamentals(tickers, proxies=None):
+    """Menarik data fundamental lengkap menggunakan yahooquery batching."""
+    # Inisiasi ticker dengan proksi
+    tickers_obj = Ticker(tickers, proxies=proxies)
+    
+    # Menarik modul secara batch
+    summary = tickers_obj.summary_detail
+    key_stats = tickers_obj.key_stats
+    financials = tickers_obj.financial_data
+    prices = tickers_obj.price
+    profiles = tickers_obj.summary_profile
+    
     fundamental_data = []
     
-    for idx, ticker in enumerate(tickers, start=1):
+    for ticker in tickers:
         try:
-            time.sleep(random.uniform(3, 7)) 
-            
-            stock = yf.Ticker(ticker, session=session)
-            info = stock.info
-            
-            # Debugging
-            if not info or len(info) < 5:
-                print(f"DEBUG: Data uncomplete for {ticker}")
-            else:
-                print(f"DEBUG: {idx}/{len(tickers)} Data complete for {ticker}")
+            # Cek jika data tidak ditemukan (mengembalikan string error)
+            if isinstance(summary.get(ticker), str): 
+                print(f"  [-] Data tidak lengkap untuk {ticker}")
+                continue
+                
+            sum_data = summary.get(ticker, {})
+            stats_data = key_stats.get(ticker, {})
+            fin_data = financials.get(ticker, {})
             
             fundamental_data.append({
                 'Ticker': ticker,
-                'Company_Name': info.get('shortName', None),
-                'Sector': info.get('sector', None),
+                'Company_Name': prices.get(ticker, {}).get('shortName', None),
+                'Sector': profiles.get(ticker, {}).get('sector', None),
                 'Extraction_Date': datetime.now().date(),
                 
                 # Valuation
-                'Market_Cap': info.get('marketCap', None),
-                'Trailing_PE': info.get('trailingPE', None),
-                'Forward_PE': info.get('forwardPE', None),
-                'Price_to_Book': info.get('priceToBook', None),
-                'PEG_Ratio': info.get('pegRatio', None),
-                'EV_to_EBITDA': info.get('enterpriseToEbitda', None),
+                'Market_Cap': sum_data.get('marketCap', None),
+                'Trailing_PE': sum_data.get('trailingPE', None),
+                'Forward_PE': sum_data.get('forwardPE', None),
+                'Price_to_Book': sum_data.get('priceToBook', None),
+                'PEG_Ratio': stats_data.get('pegRatio', None),
+                'EV_to_EBITDA': stats_data.get('enterpriseToEbitda', None),
                 
                 # Profitability
-                'ROE': info.get('returnOnEquity', None),
-                'ROA': info.get('returnOnAssets', None),
-                'Gross_Margin': info.get('grossMargins', None),
-                'Operating_Margin': info.get('operatingMargins', None),
-                'Profit_Margin': info.get('profitMargins', None),
+                'ROE': fin_data.get('returnOnEquity', None),
+                'ROA': fin_data.get('returnOnAssets', None),
+                'Gross_Margin': fin_data.get('grossMargins', None),
+                'Operating_Margin': fin_data.get('operatingMargins', None),
+                'Profit_Margin': fin_data.get('profitMargins', None),
                 
                 # Liquidity & Solvency
-                'Current_Ratio': info.get('currentRatio', None),
-                'Quick_Ratio': info.get('quickRatio', None),
-                'Debt_to_Equity': info.get('debtToEquity', None),
-                'Cash_per_Share': info.get('totalCashPerShare', None),
+                'Current_Ratio': fin_data.get('currentRatio', None),
+                'Quick_Ratio': fin_data.get('quickRatio', None),
+                'Debt_to_Equity': fin_data.get('debtToEquity', None),
+                'Cash_per_Share': fin_data.get('totalCashPerShare', None),
                 
                 # Growth & Risk
-                'Revenue_Growth': info.get('revenueGrowth', None),
-                'Earnings_Growth': info.get('earningsGrowth', None),
-                'Beta': info.get('beta', None),
-                'Short_Ratio': info.get('shortRatio', None),
-                'Fifty_Two_Week_Change': info.get('52WeekChange', None)
+                'Revenue_Growth': fin_data.get('revenueGrowth', None),
+                'Earnings_Growth': fin_data.get('earningsGrowth', None),
+                'Beta': sum_data.get('beta', None),
+                'Short_Ratio': stats_data.get('shortRatio', None),
+                'Fifty_Two_Week_Change': sum_data.get('fiftyTwoWeekChange', None)
             })
         except Exception as e:
-            print(f"  [!] Error {ticker}: {e}")
-            
+             print(f"  [!] Error fundamental {ticker}: {e}")
+             
     return pd.DataFrame(fundamental_data)
 
-# 3. Extract Index Data
-def extract_market_index(): 
-    start_str = datetime.now() - timedelta(days=1)
-    start_str = start_str.strftime('%Y-%m-%d')
-    end_str = datetime.now().strftime('%Y-%m-%d')
-
-    market_data = yf.download(
-        index_ticker, 
-        start=start_str,
-        end=end_str,
-        progress=False,
-        session=session 
-    )
-    
-    market_df = market_data[['Close']].copy()
-    market_df.columns = ['DJIA_Close']
-    
-    market_df.reset_index(inplace=True)
-    return market_df
-
-# 4. Extract OHLCV
-def extract_OHLCV(tickers):
-    start_str = datetime.now() - timedelta(days=1)
-    start_str = start_str.strftime('%Y-%m-%d')
-    end_str = datetime.now().strftime('%Y-%m-%d')
-
-    data = yf.download(
-        tickers,
-        start=start_str,
-        end=end_str,
-        group_by='ticker',
-        progress=False,
-        session=session
-    )
-
-    technical_data = []
-    for ticker in tickers:
-        try:
-            time.sleep(random.uniform(3, 7))
-            if ticker in data and not data[ticker].dropna(how='all').empty:
-                df_ticker = data[ticker].copy()
-                df_ticker.reset_index(inplace=True)
-                df_ticker['Ticker'] = ticker
-                df_ticker = df_ticker[['Date', 'Ticker', 'Open', 'High', 'Low', 'Close', 'Volume']]
-                technical_data.append(df_ticker)
-        except Exception as e:
-            print(f" [!] Error {ticker}: {e}")
-
-    if technical_data:
-        return pd.concat(technical_data, ignore_index=True)
+def extract_market_index(ticker, proxies=None):
+    """Menarik data historis index."""
+    try:
+        t = Ticker(ticker, proxies=proxies)
+        df = t.history(period="5d")
+        
+        if isinstance(df, pd.DataFrame) and not df.empty:
+            df = df.reset_index()
+            # Ambil baris terakhir (hari perdagangan paling baru)
+            df = df.tail(1).copy()
+            df = df[['date', 'close']]
+            df.columns = ['Date', 'DJIA_Close']
+            
+            # Format tanggal (menghapus zona waktu jika ada)
+            df['Date'] = pd.to_datetime(df['Date']).dt.date
+            return df
+    except Exception as e:
+        print(f" [!] Error Market Index: {e}")
+        
     return pd.DataFrame()
 
-# 5. Execution & Database Loading
+def extract_OHLCV(tickers, proxies=None):
+    """Menarik data historis teknikal (OHLCV) untuk semua ticker."""
+    try:
+        t = Ticker(tickers, proxies=proxies)
+        # Menarik data secara batch langsung untuk semua saham
+        df = t.history(period="5d")
+        
+        if isinstance(df, pd.DataFrame) and not df.empty:
+            df = df.reset_index()
+            
+            # Mengambil data hari terakhir untuk masing-masing saham
+            df_latest = df.groupby('symbol').tail(1).copy()
+            
+            # Menyesuaikan nama kolom sesuai skema database
+            df_latest = df_latest[['date', 'symbol', 'open', 'high', 'low', 'close', 'volume']]
+            df_latest.columns = ['Date', 'Ticker', 'Open', 'High', 'Low', 'Close', 'Volume']
+            
+            # Format tanggal
+            df_latest['Date'] = pd.to_datetime(df_latest['Date']).dt.date
+            return df_latest
+            
+    except Exception as e:
+        print(f" [!] Error OHLCV: {e}")
+
+    return pd.DataFrame()
+
+# ---------------------------------------------------------
+# 3. Execution & Database Loading
+# ---------------------------------------------------------
 if __name__ == "__main__":
-    # 1. Load Environment Variables
+    # Load Environment
     load_dotenv(override=True)
     
-    # 2. Database Configuration
+    # Setup Proxy
+    PROXY_URL = os.getenv('PROXY_URL')
+    proxies = get_proxies(PROXY_URL)
+    
+    if proxies:
+        print("Mengeksekusi dengan konfigurasi Proxy...")
+    else:
+        print("Mengeksekusi TANPA Proxy (Risiko blokir IP tinggi)...")
+    
+    # DB Config
     DB_USER = os.getenv('STOCK_DB_USER')
     DB_PASSWORD = os.getenv('STOCK_DB_PASS')
     DB_HOST = os.getenv('STOCK_DB_HOST')
@@ -150,41 +167,50 @@ if __name__ == "__main__":
     TABLE_MARKET = 'market_data'
     TABLE_TECHNICAL = 'technical_data'
 
-    # 3. Engine Connection
     connection_string = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     engine = create_engine(connection_string)
 
-    # 4. Execute Daily Data Extraction
-    df_fundamentals = extract_top_20_fundamentals(djia_tickers)
-    df_market = extract_market_index()
-    df_technicals = extract_OHLCV(djia_tickers)
+    # Eksekusi Ekstraksi Data
+    print("Mulai menarik data fundamental...")
+    df_fundamentals = extract_fundamentals(djia_tickers, proxies=proxies)
+    print(f"-> {len(df_fundamentals)} data fundamental ditarik.")
+    
+    print("Mulai menarik data market index...")
+    df_market = extract_market_index(index_ticker, proxies=proxies)
+    
+    print("Mulai menarik data teknikal (OHLCV)...")
+    df_technicals = extract_OHLCV(djia_tickers, proxies=proxies)
+    print(f"-> {len(df_technicals)} baris data teknikal ditarik.")
 
-    # 5. Load to PostgreSQL
+    # Load ke PostgreSQL (Menggunakan logika idempotensi Anda yang sudah ada)
     try:
         with engine.begin() as connection:
-            
-            # Fundamental Data
+            # 1. Fundamental Data
             if not df_fundamentals.empty:
                 extraction_date = df_fundamentals['Extraction_Date'].iloc[0].strftime('%Y-%m-%d')
                 connection.execute(text(f"DELETE FROM {SCHEMA_NAME}.{TABLE_FUNDAMENTAL} WHERE \"Extraction_Date\" = '{extraction_date}'"))
                 df_fundamentals.to_sql(TABLE_FUNDAMENTAL, engine, schema=SCHEMA_NAME, if_exists='append', index=False)
+                print("[OK] Data Fundamental berhasil disimpan.")
 
-            # Market Data
+            # 2. Market Data
             if not df_market.empty:
                 market_dates = pd.to_datetime(df_market['Date']).dt.strftime('%Y-%m-%d').unique()
                 market_dates_str = "', '".join(market_dates)
                 connection.execute(text(f"DELETE FROM {SCHEMA_NAME}.{TABLE_MARKET} WHERE DATE(\"Date\") IN ('{market_dates_str}')"))
                 df_market.to_sql(TABLE_MARKET, engine, schema=SCHEMA_NAME, if_exists='append', index=False)
+                print("[OK] Data Index berhasil disimpan.")
 
-            # Technical Data
+            # 3. Technical Data
             if not df_technicals.empty:
                 tech_dates = pd.to_datetime(df_technicals['Date']).dt.strftime('%Y-%m-%d').unique()
                 tech_dates_str = "', '".join(tech_dates)
                 connection.execute(text(f"DELETE FROM {SCHEMA_NAME}.{TABLE_TECHNICAL} WHERE DATE(\"Date\") IN ('{tech_dates_str}')"))
                 df_technicals.to_sql(TABLE_TECHNICAL, engine, schema=SCHEMA_NAME, if_exists='append', index=False)
+                print("[OK] Data Teknikal berhasil disimpan.")
 
     except Exception as e:
-        raise e
+        print(f"Gagal memuat data ke database: {e}")
         
     finally:
         engine.dispose()
+        print("Proses selesai.")

@@ -118,11 +118,12 @@ The pipeline triggers **every trading day, 3 hours after market close**, ensurin
 
 ### 📊 Live Dashboards
 
-| Dashboard | Description | Link |
-| :--- | :--- | :--- |
-| 📉 **Power BI — DJIA Monitor** | Macro-level view of Dow Jones Industrial Average stocks and overall market health | [Open Dashboard](www.google.com) |
-| 🤖 **Metabase — ML Stock Screener** | Stock picks with key metrics | [Open Dashboard](www.google.com) |
+| Dashboard | Link |
+| :--- | :--- |
+| 📉 **Streamlit** (Web-based) | [Open Dashboard](www.google.com) |
+| 📉 **Power BI** | [Open Dashboard](www.google.com) |
+| 📉 **Metabase** | [Open Dashboard](www.google.com) |
 
 ---
 
-*Built for traders who want more than the defaults.*
+*Help Trades to Understand Market*
