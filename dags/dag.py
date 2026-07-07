@@ -18,7 +18,8 @@ with DAG('Project',
     
     dataExtraction = BashOperator(
         task_id='run_data_extraction',
-        bash_command='python /opt/airflow/dags/scripts/data_extraction.py'
+        bash_command='python /opt/airflow/dags/scripts/data_extraction.py',
+        execution_timeout=dt.timedelta(minutes=10)
     )
     
     dataMigration = BashOperator(

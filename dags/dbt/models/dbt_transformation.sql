@@ -11,7 +11,7 @@
     )
 }}
 
-SELECT 
+SELECT DISTINCT
     f.*,
     
     -- Categorizing Market Cap
@@ -74,5 +74,8 @@ SELECT
 FROM {{ source('data_source', 'stock_dashboard') }} AS f
 
 {% if is_incremental() %}
-  WHERE f.Extraction_Date >= (SELECT MAX(Extraction_Date) FROM {{ this }})
+  WHERE f.Extraction_Date >= (
+      SELECT COALESCE(MAX(Extraction_Date), CAST('1970-01-01' AS DATE)) 
+      FROM {{ this }}
+  )
 {% endif %}

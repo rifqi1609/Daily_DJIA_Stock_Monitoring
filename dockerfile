@@ -21,4 +21,4 @@ RUN pip install --no-cache-dir -r /requirement.txt
 RUN python -m venv /opt/airflow/dbt_venv
 
 # Menginstal dbt-core dan dbt-bigquery ke dalam virtual environment tersebut
-RUN /opt/airflow/dbt_venv/bin/pip install --no-cache-dir dbt-core dbt-bigquery
+RUN PIP_USER=false /opt/airflow/dbt_venv/bin/pip install --no-cache-dir dbt-core dbt-bigquery

@@ -6,9 +6,7 @@ from dotenv import load_dotenv
 from yahooquery import Ticker
 import time
 
-# ---------------------------------------------------------
-# 1. Setup & Configuration
-# ---------------------------------------------------------
+# Extraction Functions
 djia_tickers = [
     'AAPL', 'AMGN', 'AXP', 'BA', 'CAT', 'CRM', 'CSCO', 'CVX', 'DIS', 'DOW', 
     'GS', 'HD', 'HON', 'IBM', 'INTC', 'JNJ', 'JPM', 'KO', 'MCD', 'MMM', 
@@ -16,11 +14,7 @@ djia_tickers = [
 ]
 index_ticker = '^DJI'
 
-# ---------------------------------------------------------
-# 2. Extraction Functions
-# ---------------------------------------------------------
 def get_proxies(proxy_url):
-    """Mengembalikan dictionary proxy jika URL tersedia."""
     if proxy_url:
         return {
             "http": proxy_url,
@@ -29,7 +23,6 @@ def get_proxies(proxy_url):
     return None
 
 def extract_fundamentals(tickers, proxies=None):
-    """Menarik data fundamental lengkap menggunakan yahooquery batching."""
     # Inisiasi ticker dengan proksi
     tickers_obj = Ticker(tickers, proxies=proxies)
     
@@ -93,19 +86,15 @@ def extract_fundamentals(tickers, proxies=None):
     return pd.DataFrame(fundamental_data)
 
 def extract_market_index(ticker, proxies=None):
-    """Menarik data historis index."""
     try:
         t = Ticker(ticker, proxies=proxies)
         df = t.history(period="5d")
         
         if isinstance(df, pd.DataFrame) and not df.empty:
             df = df.reset_index()
-            # Ambil baris terakhir (hari perdagangan paling baru)
             df = df.tail(1).copy()
             df = df[['date', 'close']]
             df.columns = ['Date', 'DJIA_Close']
-            
-            # Format tanggal (menghapus zona waktu jika ada)
             df['Date'] = pd.to_datetime(df['Date']).dt.date
             return df
     except Exception as e:
@@ -114,23 +103,15 @@ def extract_market_index(ticker, proxies=None):
     return pd.DataFrame()
 
 def extract_OHLCV(tickers, proxies=None):
-    """Menarik data historis teknikal (OHLCV) untuk semua ticker."""
     try:
         t = Ticker(tickers, proxies=proxies)
-        # Menarik data secara batch langsung untuk semua saham
         df = t.history(period="5d")
         
         if isinstance(df, pd.DataFrame) and not df.empty:
-            df = df.reset_index()
-            
-            # Mengambil data hari terakhir untuk masing-masing saham
+            df = df.reset_index()      
             df_latest = df.groupby('symbol').tail(1).copy()
-            
-            # Menyesuaikan nama kolom sesuai skema database
             df_latest = df_latest[['date', 'symbol', 'open', 'high', 'low', 'close', 'volume']]
             df_latest.columns = ['Date', 'Ticker', 'Open', 'High', 'Low', 'Close', 'Volume']
-            
-            # Format tanggal
             df_latest['Date'] = pd.to_datetime(df_latest['Date']).dt.date
             return df_latest
             
@@ -139,9 +120,7 @@ def extract_OHLCV(tickers, proxies=None):
 
     return pd.DataFrame()
 
-# ---------------------------------------------------------
-# 3. Execution & Database Loading
-# ---------------------------------------------------------
+# Execution
 if __name__ == "__main__":
     # Load Environment
     load_dotenv(override=True)
@@ -182,7 +161,7 @@ if __name__ == "__main__":
     df_technicals = extract_OHLCV(djia_tickers, proxies=proxies)
     print(f"-> {len(df_technicals)} baris data teknikal ditarik.")
 
-    # Load ke PostgreSQL (Menggunakan logika idempotensi Anda yang sudah ada)
+    # Load ke PostgreSQL
     try:
         with engine.begin() as connection:
             # 1. Fundamental Data

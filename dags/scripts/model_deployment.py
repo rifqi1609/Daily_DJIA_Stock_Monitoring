@@ -203,7 +203,6 @@ load_dotenv(override=True)
 
 # Connection to PostgreSQL
 def extract_from_postgres():
-    # Mengambil kredensial dari .env
     DB_USER = os.getenv('STOCK_DB_USER')
     DB_PASSWORD = os.getenv('STOCK_DB_PASS')
     DB_HOST = os.getenv('STOCK_DB_HOST')
@@ -234,27 +233,6 @@ def extract_from_postgres():
     finally:
         engine.dispose()
 
-# # Connection to BigQuery
-# def load_to_bigquery(df):
-#     if df.empty:
-#         return
-    
-#     key_path = "/opt/airflow/dags/credentials/bq_key.json"
-#     credentials = service_account.Credentials.from_service_account_file(key_path)
-#     GCP_PROJECT = os.getenv('GCP_PROJECT_ID')
-#     destination = 'clean_stock_data.stock_screening'
-    
-#     try:
-#         df.to_gbq(
-#             destination_table=destination,
-#             project_id=GCP_PROJECT,
-#             if_exists='append',
-#             credentials=credentials
-#         )
-
-#     except Exception as e:
-#         raise e
-
 # Connection to BigQuery
 def load_to_bigquery(df):
     if df.empty:
@@ -266,33 +244,25 @@ def load_to_bigquery(df):
     destination = 'clean_stock_data.stock_screening'
     
     try:
-        # Inisialisasi client BigQuery API
         client = bigquery.Client(credentials=credentials, project=GCP_PROJECT)
-        
-        # 1. Ekstrak tanggal unik dari DataFrame untuk mendeteksi batch yang masuk
         dates = pd.to_datetime(df['Date']).dt.strftime('%Y-%m-%d').unique()
         dates_str = "', '".join(dates)
-        
-        # 2. Query untuk menghapus data lama di hari yang sama (agar digantikan yang baru)
         delete_query = f"""
             DELETE FROM `{GCP_PROJECT}.{destination}`
             WHERE CAST(Date AS STRING) IN ('{dates_str}')
         """
         
-        # Kita bungkus dengan try-except agar skrip tidak gagal (crash) 
-        # jika ini adalah eksekusi hari pertama dan tabel di BigQuery belum ada.
         try:
             delete_job = client.query(delete_query)
-            delete_job.result() # Menunggu eksekusi DELETE selesai
+            delete_job.result()
             print(f"Data lama untuk tanggal {dates_str} berhasil dihapus (jika ada).")
         except Exception as e:
             print(f"Melewati proses DELETE (Tabel mungkin belum dibuat): {e}")
 
-        # 3. Masukkan data (Prediksi model) yang baru
         df.to_gbq(
             destination_table=destination,
             project_id=GCP_PROJECT,
-            if_exists='append',  # Karena yang lama sudah dihapus, append akan aman dari duplikat
+            if_exists='append',
             credentials=credentials
         )
         print("Data baru berhasil di-append ke BigQuery.")

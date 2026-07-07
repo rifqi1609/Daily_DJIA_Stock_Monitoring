@@ -11,6 +11,7 @@ x-airflow-common:
     - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres_airflow/airflow
     - AIRFLOW__CORE__LOAD_EXAMPLES=False
     - AIRFLOW__CORE__DEFAULT_TIMEZONE=Asia/Jakarta
+    - AIRFLOW__WEBSERVER__SECRET_KEY=bebas_rahasia_12345
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
@@ -35,12 +36,11 @@ services:
   # Initiate Airflow Database
   airflow-init:
     <<: *airflow-common
-    command: version
-    environment:
-      - _AIRFLOW_DB_UPGRADE=true
-      - _AIRFLOW_WWW_USER_CREATE=true
-      - _AIRFLOW_WWW_USER_USERNAME=admin
-      - _AIRFLOW_WWW_USER_PASSWORD=admin
+    command: >
+      bash -c "
+      airflow db migrate &&
+      airflow users create --username admin --password admin --firstname Rifqi --lastname Asyrafi --role Admin --email admin@example.com
+      "
     depends_on:
       postgres_airflow:
         condition: service_healthy
