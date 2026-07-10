@@ -24,12 +24,12 @@ Every trader has their own unique approach to screening stocks. Off-the-shelf to
 | Category | Tools |
 | :--- | :--- |
 | **Language & Framework** | Python, SQL |
-| **Databases & Storage** | PostgreSQL (raw data), Google BigQuery (data warehouse) |
+| **Databases & Storage** | PostgreSQL (Database), Google BigQuery (Data Warehouse) |
 | **Machine Learning** | Scikit-Learn (Classification Model) |
 | **Orchestration & DevOps** | Apache Airflow, Docker, GCP Virtual Machine |
 | **Data Transformation** | dbt (Data Build Tool) |
 | **Data Sources** | Yahoo Finance API |
-| **Business Intelligence** | Power BI, Metabase |
+| **Business Intelligence** | Streamlit |
 
 ---
 
@@ -52,10 +52,7 @@ The entire workflow is orchestrated via **Apache Airflow** on a GCP VM, running 
 | **ML Prediction** | Runs the screening model and writes results back |
 
 ### 4. 📊 Dashboards
-Two dedicated dashboards serve different monitoring needs:
-
-- **Power BI** — Macro-level view of DJIA stocks and overall market health
-- **Metabase** — Granular view of ML-flagged stocks with prediction scores and metrics
+For helping accesing online, Streamlit Dashboard was choosen to represent potential DJIA Stock
 
 ### 5. 🔔 Daily Updates
 The pipeline triggers **every trading day, 3 hours after market close**, ensuring you always have fresh, actionable data waiting for you the next morning.
@@ -114,15 +111,13 @@ The pipeline triggers **every trading day, 3 hours after market close**, ensurin
 | Resource | Description | Link |
 | :--- | :--- | :--- |
 | 🎬 **Project Presentation** | Walkthrough of the system architecture, data pipeline design, and overall project overview | [Watch Video](www.google.com) |
-| 🖥️ **Dashboard Demo** | Live demo of the Power BI and Metabase dashboards in action | [Watch Video](www.google.com) |
+| 🖥️ **Dashboard Demo** | Live demo of the Streamlit dashboards in action | [Watch Video](www.google.com) |
 
 ### 📊 Live Dashboards
 
 | Dashboard | Link |
 | :--- | :--- |
 | 📉 **Streamlit** (Web-based) | [Open Dashboard](www.google.com) |
-| 📉 **Power BI** | [Open Dashboard](www.google.com) |
-| 📉 **Metabase** | [Open Dashboard](www.google.com) |
 
 ---
 
