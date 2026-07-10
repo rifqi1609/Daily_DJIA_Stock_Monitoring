@@ -4,3 +4,4 @@ numpy
 plotly
 google-cloud-bigquery
 google-auth
+db-dtyp
