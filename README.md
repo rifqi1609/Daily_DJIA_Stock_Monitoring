@@ -6,7 +6,7 @@
 
 ## 🧩 The Problem
 
-Every trader has their own unique approach to screening stocks. Off-the-shelf tools force you into rigid, one-size-fits-all metrics that rarely match your strategy. This project solves that by giving you a **fully customizable dashboard** — built on your own criteria, updated automatically every trading day.
+Every trader has their own unique approach to screening stocks. Off-the-shelf tools force you into rigid, one-size-fits-all metrics that rarely match your strategy. This project solves that by giving you a personalized dashboard built on your own criteria, updated automatically every trading day.
 
 ---
 
@@ -14,7 +14,7 @@ Every trader has their own unique approach to screening stocks. Off-the-shelf to
 
 - **ML-powered stock screening** — predicts potential stock picks 5 days ahead using a trained classification model
 - **Daily automation** — pipeline runs 3 hours after market close on every trading day
-- **Dual dashboards** — one for DJIA market overview (Power BI), one for ML-based opportunities (Metabase)
+- **Online dashboards** — access dashboard everwhere easily
 - **Cloud-native infrastructure** — hosted on GCP, containerized with Docker, orchestrated via Airflow
 
 ---
@@ -62,44 +62,46 @@ The pipeline triggers **every trading day, 3 hours after market close**, ensurin
 ## 📁 Project Structure
 
 ```
-.
-├── dags/                          # Airflow orchestration
+├── dags/                       # Airflow orchestration
 │   ├── credentials/
-│   │   └── bq_key.json            # GCP service account credentials
-│   ├── dbt/                       # dbt data transformation
+│   │   └── bq_key.json         # GCP service account credentials
+│   ├── dbt/                    # dbt data transformation
 │   │   ├── models/
-│   │   │   ├── dbt_transformation.sql   # SQL transformation logic
-│   │   │   └── sources.yml              # Raw source definitions
-│   │   ├── dbt_project.yml        # dbt project config
-│   │   └── profiles.yml           # BigQuery connection settings
+│   │   │   └── dbt_transformation.sql # SQL transformation logic
+│   │   ├── sources.yml         # Raw source definitions
+│   │   ├── dbt_project.yml     # dbt project config
+│   │   └── profiles.yml        # BigQuery connection settings
 │   ├── ml_models/
-│   │   └── final_model.pkl        # Trained, deployment-ready ML model
+│   │   └── final_model.pkl     # Trained, deployment-ready ML model
 │   ├── scripts/
-│   │   ├── data_extraction.py     # Fetches daily data from Yahoo Finance
-│   │   ├── extract_load.py        # EL pipeline: PostgreSQL → BigQuery
-│   │   └── model_deployment.py    # Runs daily inference / predictions
-│   └── dag.py                     # Main Airflow DAG (schedules & dependencies)
+│   │   ├── data_extraction.py  # Fetches daily data from Yahoo Finance
+│   │   ├── extract_load.py     # EL pipeline: PostgreSQL -> BigQuery
+│   │   └── model_deployment.py # Runs daily inference / predictions
+│   └── dag.py                  # Main Airflow DAG (schedules & dependencies)
 │
-├── database/                      # DDL schemas for database initialization
-│   ├── bigquery_ddl.txt           # BigQuery table schemas
-│   └── postgre_ddl.txt            # PostgreSQL table schemas
+├── database/                   # DDL schemas for database initialization
+│   ├── bigquery_ddl.sql        # BigQuery table schemas
+│   └── postgre_ddl.sql         # PostgreSQL table schemas
 │
-├── ml_model/                      # Model research & experimentation
-│   ├── eda/                       # Auto-generated EDA reports
-│   │   ├── Processed Data EDA.html
-│   │   ├── Raw Market Data EDA.html
-│   │   └── Raw Technical Data EDA.html
-│   ├── model_building.ipynb       # Final model construction notebook
-│   ├── model_research.ipynb       # EDA, feature engineering, tuning & evaluation
-│   └── logs.log                   # Experiment activity log
+├── ml_model/                   # Model research & experimentation
+│   ├── eda/                    # Auto-generated EDA reports
+│   ├── logs.log                # Experiment activity log
+│   ├── model_building.ipynb    # Final model construction notebook
+│   └── model_research.ipynb    # EDA, feature engineering, tuning & evaluation
 │
-├── .dockerignore / .gitignore     # Excludes credentials and cache from tracking
-├── .env                           # Sensitive environment variables
-├── docker-compose.yml             # Multi-container setup (Airflow, PostgreSQL, Metabase)
-├── dockerfile                     # Docker image build instructions
-├── logs.log                       # Main application log
-├── requirement.txt                # Python dependencies
-└── README.md                      # You are here
+├── visualization/              # Streamlit dashboard interface
+│   ├── requirements.txt        # Dashboard-specific dependencies
+│   ├── streamlit_dashboard.json# Streamlit GCP credentials (for local dev)
+│   └── streamlit_dashboard.py  # Main Streamlit application
+│
+├── .dockerignore               # Excludes credentials and cache from Docker
+├── .env                        # Sensitive environment variables
+├── .gitignore                  # Excludes credentials and cache from Git tracking
+├── docker-compose.yml          # Multi-container setup (Airflow, PostgreSQL)
+├── dockerfile                  # Docker image build instructions
+├── logs.log                    # Main application log
+├── README.md                   # You are here
+└── requirement.txt             # Main Python dependencies for Airflow
 ```
 
 ---
@@ -117,7 +119,7 @@ The pipeline triggers **every trading day, 3 hours after market close**, ensurin
 
 | Dashboard | Link |
 | :--- | :--- |
-| 📉 **Streamlit** (Web-based) | [Open Dashboard](www.google.com) |
+| 📉 **Streamlit** (Web-based) | [Open Dashboard](https://dailydjiastockmonitoring.streamlit.app/) |
 
 ---
 
